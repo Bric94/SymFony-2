@@ -43,6 +43,12 @@ final class CrudArticleController extends AbstractController
 
         // si mon formulaire est valide est soumis
         if ($form->isSubmitted() && $form->isValid()) {
+            $article = $form->getData();
+
+            if (!$article->getCategory()) {
+                $this->addFlash('error', 'Veuillez sélectionner une catégorie.');
+                return $this->redirectToRoute('app_crud_article/new.html.twig');
+            }
             // je pesiste mon objet $article en BDD (j'insert mon objet $article en bdd)
             $entityManager->persist($article);
             // je commit et ferme la transaction
@@ -50,7 +56,7 @@ final class CrudArticleController extends AbstractController
 
             // je fais redirection après la soumission de mon formulaire
             // vers la route app_crud_article_index
-            return $this->redirectToRoute('app_crud_article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_article', ['id' => $article->getId()]);
         }
 
         // j'affiche crud_article/new.html.twig

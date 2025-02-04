@@ -9,7 +9,7 @@
         <li> Titre : {{article.title}}</li>
         <li> Description : {{article.description}}</li>
         <li> 
-            <img width="200" src="{{asset(article.picture)}}" />
+            <img width="200" src="{{ asset('uploads/images/' ~ article.picture) }}" alt="{{ article.title }}" />
         </li>
         <li> Stock :{{article.stock}}</li>
         <li> Price : {{article.price}}</li>

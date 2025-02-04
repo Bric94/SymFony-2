@@ -13,6 +13,32 @@
         {% endblock %}
     </head>
     <body>
+    <style>
+        .nav-side {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 200px;
+            background-color: #f8f9fa;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-side d-flex flex-column align-items-center">
+        <a class="nav-link" href="{{path('app_crud_article_index')}}">Catalogue</a>
+        {% if app.user %}
+        <a class="nav-link" href="{{path('app_profile')}}">Profile</a>
+        <a class="nav-link" href="{{path('app_logout')}}">Déconnexion</a>
+        {% else %}
+        <a class="nav-link" href="{{path('app_register')}}">Inscription</a>
+        <a class="nav-link" href="{{path('app_login')}}">Connexion</a>
+        {% endif %}
+    </nav>
+    <div>
         {% block body %}{% endblock %}
+    </div>
     </body>
 </html>
